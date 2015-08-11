@@ -1,3 +1,5 @@
 %h1 Hello, Rails!
+- flash.each do |key, value|
+    = content_tag(:div, value, :class => "flash #{key}")
 = link_to 'My Blog', controller: 'articles'
 = link_to 'New article', new_article_path
