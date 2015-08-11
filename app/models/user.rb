@@ -3,6 +3,6 @@ has_many :articles
 
 validates :name, presence: true
 validates :provider, presence: true
-validates :uid, presence: true
+validates :uid, presence: true, uniqueness: true
 
 end

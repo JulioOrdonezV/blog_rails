@@ -24,4 +24,10 @@ describe User, type: :model do
     no_uid_user = User.new(@attr.merge(uid: ''))
     expect(no_uid_user).to be_invalid
   end
+
+  it "should reject duplicate uids" do
+    User.create!(@attr)
+    user_with_same_uid = User.new(@attr)
+    expect(user_with_same_uid).to be_invalid
+  end
 end
