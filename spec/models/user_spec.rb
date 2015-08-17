@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id         :integer          not null, primary key
+#  provider   :string
+#  uid        :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'spec_helper'
 require 'rails_helper'
 
@@ -25,9 +37,16 @@ describe User, type: :model do
     expect(no_uid_user).to be_invalid
   end
 
-  it "should reject duplicate uids" do
+  it "should reject duplicate uids when using same provider" do
     User.create!(@attr)
     user_with_same_uid = User.new(@attr)
     expect(user_with_same_uid).to be_invalid
   end
+
+  it "should accept duplicate uids when provider differs" do
+    User.create!(@attr)
+    user_same_uid_different_provider = User.new(@attr.merge(provider: 'google'))
+    expect(user_same_uid_different_provider).to be_valid
+  end
+
 end
