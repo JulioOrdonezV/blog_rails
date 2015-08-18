@@ -41,6 +41,10 @@ gem 'omniauth-facebook'
 group :development, :test do
   gem 'byebug'
 
+  gem 'factory_girl_rails'
+
+  gem 'faker'
+
   gem 'web-console', '~> 2.0'
 
   gem 'spring'
@@ -49,4 +53,3 @@ group :development, :test do
 
   gem 'capybara'
 end
-
