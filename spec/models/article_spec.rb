@@ -22,7 +22,8 @@ describe Article, type: :model do
   end
 
   it "should create a new instance given valid attributes" do
-    @user.articles.create!(@attr)
+    valid_article  = @user.articles.create!(@attr)
+    expect(valid_article).to be_valid
   end
 
   it "should have a title" do
