@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_filter :logged_in_user
 
   def create
     @article = Article.find(params[:article_id])
