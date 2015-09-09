@@ -8,10 +8,12 @@
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_image :string
 #
 
 class User < ActiveRecord::Base
-	has_many :articles
+	has_many :articles, dependent: :destroy
+	has_many :comments, dependent: :destroy
 
 	validates :name, presence: true
 	validates :provider, presence: true
