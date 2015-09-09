@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
 
+  before_filter :logged_in_user, only:[:edit, :update, :new, :create, :destroy]
+
   def index
     @articles = Article.all
   end
@@ -38,7 +40,6 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-
     redirect_to articles_path
   end
 
@@ -46,5 +47,4 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :text)
     end
-
 end

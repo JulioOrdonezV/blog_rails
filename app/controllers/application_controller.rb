@@ -9,6 +9,17 @@ class ApplicationController < ActionController::Base
   	@current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  helper_method :current_user
-  
+  def is_logged_in?
+    !session[:user_id].nil?
+  end
+
+  def logged_in_user
+    unless is_logged_in?
+      flash[:error] = "YOU NEED TO SIGN IN FIRST!"
+      redirect_to root_url
+    end
+  end
+
+  helper_method :current_user, :is_logged_in?, :logged_in_user
+
 end

@@ -2,15 +2,35 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title BlogRails
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    %meta{name: "viewport", content: "width=device-width; initial-scale=1"}/
+    %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", :rel => "stylesheet"}/
+    %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css", :rel => "stylesheet"}/
+    %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
+    %script{:src=> "/rails_blog.js"}
+
+    %title RailsBlog
     = csrf_meta_tags
   %body
-  -if current_user
-    =image_tag( current_user.user_image, width: '50', heigth: '50')
-    signed in as #{current_user.name} 
-    =link_to "sign out", sign_out_path
-  -else
-    =link_to "sign in with facebook", "/auth/facebook"
-  = yield
+    .navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          =link_to "RAILSBLOG", root_path, class: "navbar-brand"
+        %ul.nav.navbar-nav
+          %li.active
+            =link_to "HOME", root_path
+          %li
+            =link_to "ARTICLES", articles_path
+          %li
+            =link_to "CREATE", new_article_path
+        %ul.nav.navbar-nav.navbar-right
+          -if current_user
+            %li
+              =link_to "sign out", sign_out_path
+            %li{title: "signed in as #{current_user.name}"}
+              =image_tag(current_user.user_image, width: '50', heigth: '50', class: 'img-circle')
+          -else
+            %li
+              =link_to "sign in with facebook", "/auth/facebook"
+    = yield
