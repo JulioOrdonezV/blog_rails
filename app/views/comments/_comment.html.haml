@@ -1,8 +1,8 @@
 %p
-  %strong Comenter:
-  = comment.user.name
+  %h6
+    = comment.user.name
 %p
-  %strong Comment:
   = comment.body
 
-= link_to 'Destroy Comment', [comment.article, comment], method: :delete
+= link_to 'Delete', [comment.article, comment], method: :delete
+%br

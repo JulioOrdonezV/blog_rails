@@ -1,17 +1,40 @@
-%p
-  %strong Title:
-  = @article.title
-%p
-  %strong Text:
-  = @article.text
-%p
-  %strong Author:
-  = @article.user.name
-%h2 Comments
-= render @article.comments
-
-%h2 Add a comment:
-= render 'comments/form'
-
-= link_to 'Edit', edit_article_path(@article)
-= link_to 'Back', articles_path
+.container.mtb
+  .row
+    .col-lg-12
+      %h3.ctitle
+        = @article.title
+      %p
+        %csmall
+          Posted
+          = @article.created_at
+          |
+        %csmall
+          By:
+          = @article.user.name
+      %p
+        = link_to 'Edit', edit_article_path(@article)
+        = link_to 'Delete', article_path(@article), method: :delete
+        %br
+        = @article.text
+    %p
+      %h6
+        = @article.user.name
+      %image.img-circle{src: @article.user.user_image}
+    .spacing
+    %h6 share
+    %p.share
+      %a{href: "#"}
+        %i.fa.fa-twitter
+      %a{href: "#"}
+        %i.fa.fa-facebook
+      %a{href: "#"}
+        %i.fa.fa-tumblr
+      %a{href: "#"}
+        %i.fa.fa-google-plus
+    .hline
+    .spacing
+    -if @article.comments.any?
+      %strong Comments
+      = render @article.comments
+    %strong Add a comment:
+    = render 'comments/form'
