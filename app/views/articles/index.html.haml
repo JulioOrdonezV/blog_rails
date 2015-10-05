@@ -1,17 +1,29 @@
-%h1 Listing articles
-%p
-  = link_to 'New Article', new_article_path
-%table
-  %tr
-    %th Title
-    %th Text
-    %th{colspan: "3"}
+#blue
+  .container
+    .row
+      %h3.centered Articles Feed
+.container.mtb
+  .row
+    - @articles.each do |article|
 
-  - @articles.each do |article|
-    %tr
-      %td= article.title
-      %td= article.text
-      %td= link_to 'Show', article_path(article)
-      %td= link_to 'Edit', edit_article_path(article)
-      %td= link_to 'Destroy', article_path(article),
-        method: :delete
+      .col-lg-12
+        %h3.ctitle
+          = article.title
+        %p
+          %csmall
+            Posted:
+            = article.created_at
+            |
+            %csmall2
+              By:
+              =article.user.name
+        %p
+          %csmall
+            = article.text
+        %p
+          = link_to 'Read', article_path(article)
+          = link_to 'Edit', edit_article_path(article)
+          = link_to 'Delete', article_path(article),
+          method: :delete
+        .hline
+        .spacing

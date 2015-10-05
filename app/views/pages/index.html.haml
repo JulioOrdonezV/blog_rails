@@ -1,5 +1,29 @@
-%h1 Welcome to the Blog Home Page!
+#headerwrap
+  .container
+    .row
+      .col-lg-8.col-lg-offset-2
+        %h3 Start creating your own posts!
+        %h1 Welcome to the RailsBlog
+        %h5 I created this app during the apprenticeship program
+        %h5 at pernix-solutions!
+    .col-lg-8.col-lg-offset-2.himg
+      %img.img-responsive.img-rounded{ src: "http://www.themusehotel.com/design/images/930-481/nyc-skyline.jpg"}
+
+#service
+  .container
+    .row.centered
+      .col-md-4
+        %i.fa.fa-terminal
+        %h4 Ruby on Rails
+        %p have fun sharing your experience as a RoR programmer, let's use the command line because it is super-fun, start talking like a geek and be the smartest guy in the building by reading these posts constantly.
+      .col-md-4
+        %i.fa.fa-tags
+        %h4 Tag your friends
+        %p spread the world and donate!, your friends and family will love to take a look and hopefully they will donate some money too!
+      .col-md-4
+        %i.fa.fa-quote-left
+        %h4 Get free quotes!
+        %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
 - flash.each do |key, value|
-    = content_tag(:div, value, :class => "flash #{key}")
-= link_to 'Articles', controller: 'articles'
-= link_to 'New article', new_article_path
+  =content_tag(:div, value, :class => "flash #{key}")

@@ -5,25 +5,24 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     %meta{name: "viewport", content: "width=device-width; initial-scale=1"}/
-    %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", :rel => "stylesheet"}/
-    %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css", :rel => "stylesheet"}/
-    %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
-    %script{:src=> "/rails_blog.js"}
-
     %title RailsBlog
     = csrf_meta_tags
   %body
-    .navbar.navbar-default
+    .navbar.navbar-default.navbar-fixed-top{ role: "navigation" }
       .container-fluid
         .navbar-header
           =link_to "RAILSBLOG", root_path, class: "navbar-brand"
-        %ul.nav.navbar-nav
-          %li.active
-            =link_to "HOME", root_path
-          %li
-            =link_to "ARTICLES", articles_path
-          %li
-            =link_to "CREATE", new_article_path
+        .navbar-collapse.collapse.navbar-left
+          %ul.nav.navbar-nav
+            %li{ :class => is_active?("/") }
+              =link_to "HOME", root_path
+
+            %li{ :class => is_active?(controller: "articles", action:"index") }
+              =link_to "ARTICLES", articles_path
+
+            %li{ :class => is_active?(controller: "articles", action:"new") }
+              =link_to "CREATE", new_article_path
+
         %ul.nav.navbar-nav.navbar-right
           -if current_user
             %li
@@ -32,5 +31,38 @@
               =image_tag(current_user.user_image, width: '50', heigth: '50', class: 'img-circle')
           -else
             %li
-              =link_to "sign in with facebook", "/auth/facebook"
+              %a.btn.btn-block.btn-social.btn-facebook{ :href => "/auth/facebook" }
+                %i.fa.fa-facebook
+                  Sign in with Facebook
     = yield
+    #footerwrap
+      .container
+        .row
+          .col-lg-4
+            %h4 About
+            .hline-w
+            %p This is a sample blog application developed by Julio Ordonez Viales @pernix labs for training purposes and in order to have something on my portfolio.
+          .col-lg-4
+            %h4 Social Links
+            .hline-w
+            %p
+              %a{ href: "#"}
+                %i.fa.fa-dribbble
+              %a{ href: "#"}
+                %i.fa.fa-facebook
+              %a{ href: "#"}
+                %i.fa.fa-twitter
+              %a{ href: "#"}
+                %i.fa.fa-instagram
+              %a{ href: "#"}
+                %i.fa.fa-tumblr
+          .col-lg-4
+            %h4 Our Bunker
+            .hline-w
+            %p
+              Terramall Campus Corporativo,
+              %br
+              Three Rivers, Cartago
+              %br
+              Costa Rica.
+              %br
