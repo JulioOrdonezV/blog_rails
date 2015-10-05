@@ -33,6 +33,8 @@
         %i.fa.fa-google-plus
     .hline
     .spacing
+    - flash.each do |key, value|
+      =content_tag(:div, value, :class => "flash #{key}")
     -if @article.comments.any?
       %strong Comments
       = render @article.comments
